@@ -36,12 +36,15 @@ GEN_MK_VARS = $(shell $(GET_VARS_SH) $(TEMPLATES))
 .PHONY: all files clean files pull build
 .PHONY: up start stop restart logs
 .PHONY: config inspect
+.PHONY: update
 ifneq ($(SHELL),)
 .PHONY: shell
 endif
 
 all: pull build
 
+update:
+	git submodule update --remote
 #
 #
 clean:

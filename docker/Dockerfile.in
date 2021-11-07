@@ -1,6 +1,9 @@
 # vim: set ft=dockerfile ts=4 sw=4 et:
 FROM @@PHP_IMAGE@@
 
+#
+# extra php dependencies
+#
 RUN apk --update upgrade -U && apk --no-cache add \
     php7-curl \
     php7-dom \
@@ -18,6 +21,18 @@ RUN apk --update upgrade -U && apk --no-cache add \
     php7-xmlreader \
     php7-xmlwriter \
     php7-zip
+
+#
+# bash and node.js needed to build assets
+#
+ENV NPM_VERSION=8.1.3
+
+RUN apk --update upgrade -U && apk --no-cache add \
+        bash \
+        npm \
+    && npm i -g \
+        npm@${NPM_VERSION} \
+    && rm -rf ~/.npm
 
 #
 # setup

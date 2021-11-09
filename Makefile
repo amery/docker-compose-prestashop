@@ -78,7 +78,7 @@ up: files
 	$(DOCKER_COMPOSE) up $(DOCKER_COMPOSE_UP_OPT)
 
 start: files
-	mkdir -p overlay .overlay
+	mkdir -p overlay .overlay db vendor var
 	$(DOCKER_COMPOSE) up -d $(DOCKER_COMPOSE_UP_OPT)
 
 stop: files

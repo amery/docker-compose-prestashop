@@ -8,9 +8,6 @@ volumes:
       type: overlay
       o: "lowerdir=${PWD}/PrestaShop,upperdir=${PWD}/overlay,workdir=${PWD}/.overlay"
       device: overlay
-  db-data:
-  vendor:
-  var:
 
 services:
   mysql:
@@ -18,7 +15,7 @@ services:
     ports:
       - "3306"
     volumes:
-      - db-data:/var/lib/mysql
+      - ./db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: prestashop
       MYSQL_DATABASE: prestashop
@@ -43,8 +40,8 @@ services:
       - "traefik.http.services.@@NAME@@.loadbalancer.server.port=80"
     volumes:
       - prestashop:/var/www/html
-      - vendor:/var/www/html/vendor
-      - var:/var/www/html/var
+      - ./vendor:/var/www/html/vendor
+      - ./var:/var/www/html/var
     networks:
       - @@TRAEFIK_BRIDGE@@
       - default

@@ -1,0 +1,4 @@
+[submodule "PrestaShop"]
+	path = PrestaShop
+	url = https://github.com/PrestaShop/PrestaShop
+	branch = 1.7.8.x

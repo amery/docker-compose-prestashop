@@ -6,9 +6,7 @@ server {
     listen [::]:80 default_server ipv6only=off;
     server_name @@HOSTNAME@@;
 
-    # This should match the `post_max_size` and/or `upload_max_filesize` settings
-    # in your php.ini.
-    client_max_body_size 16m;
+    client_max_body_size @@PHP_MAX_UPLOAD_MB@@m;
     client_body_buffer_size 128k;
 
     root @@PS_PROJECT_PATH@@;

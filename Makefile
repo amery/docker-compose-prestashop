@@ -6,7 +6,10 @@ SHELL = /bin/sh
 
 # generated outputs
 #
-FILES = docker-compose.yml db.env prestashop.env
+FILES = docker-compose.yml \
+	docker/Dockerfile \
+	prestashop.env \
+	db.env
 
 CONFIG_MK = config.mk
 GEN_MK = gen.mk

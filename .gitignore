@@ -1,4 +1,5 @@
 /docker-compose.yml
+/docker/Dockerfile
 /gen.mk
 /.overlay
 /db.env

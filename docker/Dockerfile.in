@@ -1,0 +1,17 @@
+# vim: set ft=dockerfile ts=4 sw=4 et:
+FROM @@PHP_IMAGE@@
+
+RUN apk --update upgrade -U && apk --no-cache add \
+    php7-curl \
+    php7-dom \
+    php7-fileinfo \
+    php7-gd \
+    php7-iconv \
+    php7-intl \
+    php7-json \
+    php7-mbstring \
+    php7-openssl \
+    php7-pdo \
+    php7-pdo_mysql \
+    php7-simplexml \
+    php7-zip

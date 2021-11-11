@@ -41,6 +41,11 @@ RUN apk --update upgrade -U && apk --no-cache add \
     && rm -rf ~/.npm
 
 #
+# php configuration
+#
+COPY php.ini /etc/php7/conf.d/50-settings.ini
+
+#
 # setup
 #
 COPY prestashop.sh /etc/entrypoint.d/

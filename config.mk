@@ -15,3 +15,4 @@ PS_DISABLE_MAKE ?= 0
 PS_INSTALL_AUTO ?= 1
 PS_FOLDER_INSTALL ?= install-dev
 PS_FOLDER_ADMIN ?= admin-dev
+PS_PROJECT_PATH ?= /srv/http/prestashop

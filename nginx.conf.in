@@ -11,9 +11,8 @@ server {
     client_max_body_size 16m;
     client_body_buffer_size 128k;
 
-    root /var/www/html;
+    root @@PS_PROJECT_PATH@@;
 
-    # [EDIT] Path to your domain Nginx logs.
     access_log /var/log/nginx/example.com-access.log;
     error_log /var/log/nginx/example.com-error.log;
 

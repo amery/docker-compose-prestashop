@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-cd /var/www/html
+cd ${PS_PROJECT_PATH:-/var/www/html}
 
 info() {
 	echo

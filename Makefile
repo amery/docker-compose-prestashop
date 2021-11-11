@@ -91,6 +91,7 @@ start: files
 
 stop: files
 	$(DOCKER_COMPOSE) down --remove-orphans
+	-$(DOCKER) volume rm $(NAME)_prestashop
 
 restart: files
 	$(DOCKER_COMPOSE) restart

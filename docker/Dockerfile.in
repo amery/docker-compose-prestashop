@@ -14,4 +14,12 @@ RUN apk --update upgrade -U && apk --no-cache add \
     php7-pdo \
     php7-pdo_mysql \
     php7-simplexml \
+    php7-tokenizer \
+    php7-xmlreader \
+    php7-xmlwriter \
     php7-zip
+
+#
+# setup
+#
+COPY prestashop.sh /etc/entrypoint.d/

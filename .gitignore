@@ -1,5 +1,6 @@
 /docker-compose.yml
 /docker/Dockerfile
+/docker/php.ini
 /gen.mk
 /.overlay
 /db.env

@@ -8,6 +8,7 @@ SHELL = /bin/sh
 #
 FILES = docker-compose.yml \
 	docker/Dockerfile \
+	docker/php.ini \
 	db.env \
 	prestashop.env \
 	nginx.env \

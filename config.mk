@@ -1,8 +1,10 @@
 TRAEFIK_BRIDGE ?= traefiknet
+USER_UID ?= $(shell id -ur)
+USER_GID ?= $(shell id -gr)
 NAME ?= prestashop
 HOSTNAME ?= $(NAME).docker.localhost
-MYSQL_SERVER ?= mysql
-MYSQL_IMAGE ?= mysql:5
+MYSQL_SERVER ?= db
+MYSQL_IMAGE ?= amery/docker-alpine-mariadb
 MYSQL_DATABASE ?= $(NAME)
 MYSQL_USER ?= $(MYSQL_DATABASE)
 MYSQL_PASSWORD ?= prestashop

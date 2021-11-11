@@ -8,8 +8,10 @@ SHELL = /bin/sh
 #
 FILES = docker-compose.yml \
 	docker/Dockerfile \
+	db.env \
 	prestashop.env \
-	db.env
+	nginx.env \
+	nginx.conf
 
 CONFIG_MK = config.mk
 GEN_MK = gen.mk

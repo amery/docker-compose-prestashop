@@ -4,3 +4,5 @@
 /.overlay
 /db.env
 /prestashop.env
+/nginx.env
+/nginx.conf

@@ -3,6 +3,7 @@ USER_UID ?= $(shell id -ur)
 USER_GID ?= $(shell id -gr)
 NAME ?= prestashop
 HOSTNAME ?= $(NAME).docker.localhost
+NGINX_IMAGE ?= amery/docker-alpine-nginx
 PHP_IMAGE ?= amery/docker-alpine-php7:latest
 MYSQL_SERVER ?= db
 MYSQL_IMAGE ?= amery/docker-alpine-mariadb

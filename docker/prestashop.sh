@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+set -e
 cd /var/www/html
 
 info() {
@@ -43,3 +43,23 @@ else
 
 	info "DB server $DB_SERVER is available, let's continue !"
 fi
+
+if [ -s ./config/settings.inc.php ]; then
+	info "Prestashop Core already installed..."
+
+elif [ "${PS_INSTALL_AUTO:-1}" = 1 ]; then
+
+	info "Installing PrestaShop, this may take a while ..."
+
+	if [ -z "${PS_DOMAIN:-}" ]; then
+		export PS_DOMAIN=$(hostanem -i)
+	fi
+
+	run-user php $PWD/${PS_FOLDER_INSTALL:-install-dev}/index_cli.php \
+	--domain="$PS_DOMAIN" --db_server=$DB_SERVER:$DB_PORT --db_name="$DB_NAME" --db_user=$DB_USER \
+	--db_password=$DB_PASSWD --prefix="$DB_PREFIX" --firstname="John" --lastname="Doe" \
+	--password=$ADMIN_PASSWD --email="$ADMIN_MAIL" --language=$PS_LANGUAGE --country=$PS_COUNTRY \
+	--all_languages=$PS_ALL_LANGUAGES --newsletter=0 --send_email=0 --ssl=$PS_ENABLE_SSL
+fi
+
+info "Almost ! Starting web server now"

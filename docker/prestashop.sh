@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -eu
 cd ${PS_PROJECT_PATH:-/var/www/html}
 
 info() {
@@ -56,10 +56,16 @@ elif [ "${PS_INSTALL_AUTO:-1}" = 1 ]; then
 	fi
 
 	run-user php $PWD/${PS_FOLDER_INSTALL:-install-dev}/index_cli.php \
-	--domain="$PS_DOMAIN" --db_server=$DB_SERVER:$DB_PORT --db_name="$DB_NAME" --db_user=$DB_USER \
-	--db_password=$DB_PASSWD --prefix="$DB_PREFIX" --firstname="John" --lastname="Doe" \
-	--password=$ADMIN_PASSWD --email="$ADMIN_MAIL" --language=$PS_LANGUAGE --country=$PS_COUNTRY \
-	--all_languages=$PS_ALL_LANGUAGES --newsletter=0 --send_email=0 --ssl=1
+	--domain="$PS_DOMAIN" --db_server=$DB_SERVER${DB_PORT:+:$DB_PORT} \
+	--db_name="$DB_NAME" ${DB_PREFIX:+--prefix="$DB_PREFIX"} \
+	--db_user="$DB_USER" --db_password="${DB_PASSWD:-}" \
+	--firstname="John" --lastname="Doe" \
+	${ADMIN_PASSWD:+--password="$ADMIN_PASSWD"} \
+	${ADMIN_MAIL:+--email=$ADMIN_MAIL} \
+	${PS_LANGUAGE:+--language=$PS_LANGUAGE} \
+	${PS_COUNTRY:+--country=$PS_COUNTRY} \
+	${PS_ALL_LANGUAGES:+--all_languages=$PS_ALL_LANGUAGES} \
+	--newsletter=0 --send_email=0 --ssl=1
 fi
 
 info "Almost ! Starting web server now"

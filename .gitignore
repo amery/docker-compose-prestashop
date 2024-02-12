@@ -1,9 +1,10 @@
+/.overlay
+/vendor
 /docker-compose.yml
 /docker/Dockerfile
 /docker/php.ini
 /gen.mk
-/.overlay
+/app.env
 /db.env
-/prestashop.env
 /nginx.env
 /nginx.conf

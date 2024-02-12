@@ -2,7 +2,7 @@
 version: '3'
 
 volumes:
-  prestashop:
+  app:
     driver: local
     driver_opts:
       type: overlay
@@ -22,12 +22,12 @@ services:
     networks:
       - default
 
-  prestashop:
+  app:
     build: ./docker
     env_file:
-      - "prestashop.env"
+      - "app.env"
     volumes:
-      - "prestashop:@@PS_PROJECT_PATH@@"
+      - "app:@@PS_PROJECT_PATH@@"
       - "./vendor:@@PS_PROJECT_PATH@@/vendor"
       - "./var:@@PS_PROJECT_PATH@@/var"
     depends_on:
@@ -43,10 +43,10 @@ services:
     env_file:
       - "nginx.env"
     volumes:
-      - "prestashop:@@PS_PROJECT_PATH@@"
+      - "app:@@PS_PROJECT_PATH@@"
       - "./nginx.conf:/etc/nginx/conf.d/default.conf"
     depends_on:
-      - prestashop
+      - app
     networks:
       - @@TRAEFIK_BRIDGE@@
       - default

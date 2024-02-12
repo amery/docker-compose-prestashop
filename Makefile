@@ -10,8 +10,8 @@ SHELL = /bin/sh
 FILES = docker-compose.yml \
 	docker/Dockerfile \
 	docker/php.ini \
+	app.env \
 	db.env \
-	prestashop.env \
 	nginx.env \
 	nginx.conf
 
@@ -83,18 +83,21 @@ include $(CONFIG_MK)
 
 export COMPOSE_PROJECT_NAME=$(NAME)
 
-up: files
+.PHONY: prestart
+prestart: files
+	mkdir -p overlay .overlay db vendor var
+
+up: prestart
 	$(DOCKER_COMPOSE) up $(DOCKER_COMPOSE_UP_OPT)
 
-start: files
-	mkdir -p overlay .overlay db vendor var
+start: prestart
 	$(DOCKER_COMPOSE) up -d $(DOCKER_COMPOSE_UP_OPT)
 
 stop: files
 	$(DOCKER_COMPOSE) down --remove-orphans
 	-$(DOCKER) volume rm $(NAME)_prestashop
 
-restart: files
+restart: prestart
 	$(DOCKER_COMPOSE) restart
 
 logs: files
@@ -102,7 +105,7 @@ logs: files
 
 ifneq ($(SHELL),)
 shell: files
-	$(DOCKER_COMPOSE) exec $(NAME) $(SHELL)
+	$(DOCKER_COMPOSE) exec app $(SHELL)
 endif
 
 update:
@@ -122,7 +125,7 @@ config: files
 
 inspect:
 	$(DOCKER_COMPOSE) ps
-	for x in $(PROXY_BRIDGE) $(NAME)_default; do \
+	for x in $(TRAEFIK_BRIDGE) $(NAME)_default; do \
 		if $(DOCKER) network list | grep -q " $$x "; then \
 			$(DOCKER) network inspect -v $$x; \
 		fi; \

@@ -48,4 +48,4 @@ COPY php.ini /etc/php7/conf.d/50-settings.ini
 #
 # setup
 #
-COPY prestashop.sh /etc/entrypoint.d/
+COPY app.sh /etc/entrypoint.d/

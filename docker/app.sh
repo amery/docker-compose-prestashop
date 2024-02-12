@@ -52,7 +52,7 @@ elif [ "${PS_INSTALL_AUTO:-1}" = 1 ]; then
 	info "Installing PrestaShop, this may take a while ..."
 
 	if [ -z "${PS_DOMAIN:-}" ]; then
-		export PS_DOMAIN=$(hostanem -i)
+		export PS_DOMAIN=$(hostname -i)
 	fi
 
 	run-user php $PWD/${PS_FOLDER_INSTALL:-install-dev}/index_cli.php \
